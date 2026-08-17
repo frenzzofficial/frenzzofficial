@@ -3,6 +3,7 @@ export const appConfig = {
   brand: {
     name: "Frenzz",
     logo: "/logo.png",
+    avatar: "/avatar_logo.png",
     handle: "@frenzzofficial",
     title: "Frenzz",
     description:

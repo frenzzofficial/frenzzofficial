@@ -1,17 +1,20 @@
+"use client";
 import Image from "next/image";
 import { Badge, Button } from "@/components/ui";
 import { appConfig } from "@/packages/configs/app.config";
+import useOrbitGravity from "@/packages/hooks/useOrbitGravity";
 
-const ORBIT_POSITIONS = [
-  { top: "2%", left: "50%" },
-  { top: "28%", left: "95%" },
-  { top: "78%", left: "88%" },
-  { top: "92%", left: "22%" },
-  { top: "32%", left: "2%" },
-];
-
-export function Hero() {
+const Hero = () => {
   const { hero, brand, ventures } = appConfig;
+  const {
+    stageRef,
+    setItemRef,
+    stageHandlers,
+    handleItemEnter,
+    handleItemLeave,
+  } = useOrbitGravity({
+    count: ventures.length,
+  });
 
   return (
     <header className="relative py-24">
@@ -50,14 +53,18 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-square max-w-110 mx-auto w-full">
+        <div
+          ref={stageRef}
+          {...stageHandlers}
+          className="relative aspect-square max-w-110 mx-auto w-full"
+        >
           <div className="absolute inset-0 rounded-full border border-border" />
-          <div className="absolute inset-[14%] rounded-full border border-dashed border-border animate-[spin_40s_linear_infinite]" />
+          <div className="absolute inset-[14%] rounded-full border border-dashed border-border" />
           <div className="absolute inset-[28%] rounded-full border border-border" />
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-29.5 h-29.5 rounded-full overflow-hidden shadow-[0_0_70px_-10px_var(--secondary)]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-29.5 h-29.5 rounded-full overflow-hidden shadow-[0_0_70px_-10px_var(--secondary)] z-10">
             <Image
-              src={brand.logo}
+              src={brand.avatar}
               alt={brand.name}
               fill
               className="object-cover"
@@ -65,20 +72,25 @@ export function Hero() {
           </div>
 
           {ventures.map((venture, i) => (
-            <div
+            <button
+              type="button"
               key={venture.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 bg-card/85 backdrop-blur border border-border rounded-full pl-2 pr-3 py-1.5 font-mono text-[11px] whitespace-nowrap"
-              style={ORBIT_POSITIONS[i]}
+              ref={setItemRef(i) as <T>(el: T | null) => void}
+              onMouseEnter={() => handleItemEnter(i)}
+              onMouseLeave={() => handleItemLeave(i)}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 bg-card/90 backdrop-blur border border-border rounded-full pl-2 pr-3 py-1.5 font-mono text-[11px] whitespace-nowrap cursor-pointer transition-[border-color,box-shadow] duration-300 hover:border-accent/60 hover:shadow-[0_0_26px_-4px_var(--accent)]"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_var(--accent)]" />
               {venture.category === "ENGINEERING"
                 ? "Web & AI Dev"
                 : venture.category.charAt(0) +
                   venture.category.slice(1).toLowerCase()}
-            </div>
+            </button>
           ))}
         </div>
       </div>
     </header>
   );
-}
+};
+
+export default Hero;
