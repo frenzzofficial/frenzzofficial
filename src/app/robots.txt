@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://frenzzofficial.github.io/sitemap.xml

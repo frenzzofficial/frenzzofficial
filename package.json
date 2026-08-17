@@ -1,0 +1,49 @@
+{
+  "name": "frenzzofficial",
+  "description": "Frenzz is a platform connecting passionate developers, gamers, and creators — people who don't just work in tech and culture, they live it.",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prepare": "rimraf out",
+    "dev": "next dev",
+    "prebuild": "bun run prepare",
+    "build": "next build",
+    "start": "next start",
+    "serve": "npx serve out -l 3000",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --fix .",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "verify": "bun run lint && bun run format && bun run check && bun run typecheck"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "rimraf": "^6.1.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "packageManager": "bun@1.3.9",
+  "ignoreScripts": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ]
+}
