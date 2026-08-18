@@ -3,7 +3,7 @@ import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
 import "highlight.js/styles/github-dark.css";
-import "../../../styles/markdown.css";
+import "@/styles/ui/markdown.css";
 
 interface MarkdownProps {
   content: string;

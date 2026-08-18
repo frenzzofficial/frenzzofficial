@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
+import Markdown from "@/components/ui/markdown/Markdown";
+import { docsConfig } from "@/packages/configs/docs.config";
 import { getDocBySlug, getDocContent } from "@/packages/hooks/useDocs";
 
 interface Props {
@@ -13,9 +15,19 @@ const DocsTemplate = async ({ slug }: Props) => {
   const markdown = getDocContent(doc);
 
   return (
-    <article className="prose">
-      <Markdown>{markdown}</Markdown>
-    </article>
+    <div className="docs-page">
+      <div className="docs-page-header">
+        <Link href={`/${docsConfig.path}`} className="docs-back-link">
+          ← Back to Docs
+        </Link>
+        <h1>{doc.title}</h1>
+        {doc.description && (
+          <p className="docs-page-description">{doc.description}</p>
+        )}
+      </div>
+
+      <Markdown content={markdown} />
+    </div>
   );
 };
 

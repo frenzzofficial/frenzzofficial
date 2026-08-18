@@ -11,7 +11,7 @@
 
 .text-header h4 {
   margin: 0;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 700;
   line-height: 1.2;
@@ -32,16 +32,16 @@
   padding: 24px;
   overflow: hidden;
 
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   text-decoration: none;
 
-  background: hsl(var(--card));
-  border: 10px solid hsl(var(--border));
+  background: var(--card);
+  border: 10px solid var(--border);
   border-radius: 18px;
 
   box-shadow:
-    0 1px 2px hsl(var(--foreground)),
-    0 8px 30px hsl(var(--foreground));
+    0 1px 2px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 8px 30px color-mix(in oklch, var(--foreground) 8%, transparent);
 
   transition:
     transform 180ms ease,
@@ -57,7 +57,7 @@
 
   background: radial-gradient(
     circle at 100% 0%,
-    hsl(var(--primary) / 0.12),
+    color-mix(in oklch, var(--primary) 12%, transparent),
     transparent 38%
   );
 
@@ -70,12 +70,12 @@
 .card:hover {
   transform: translateY(-4px);
 
-  background: hsl(var(--card) / 0.9);
-  border-color: hsl(var(--primary) / 0.4);
+  background: color-mix(in oklch, var(--card) 90%, transparent);
+  border-color: color-mix(in oklch, var(--primary) 40%, transparent);
 
   box-shadow:
-    0 4px 12px hsl(var(--foreground) / 0.06),
-    0 18px 45px hsl(var(--primary) / 0.08);
+    0 4px 12px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 18px 45px color-mix(in oklch, var(--primary) 8%, transparent);
 }
 
 .card:hover::before {
@@ -84,11 +84,11 @@
 
 .card:focus-visible {
   outline: none;
-  border-color: hsl(var(--ring));
+  border-color: var(--ring);
 
   box-shadow:
-    0 0 0 3px hsl(var(--ring) / 0.2),
-    0 12px 30px hsl(var(--foreground) / 0.06);
+    0 0 0 3px color-mix(in oklch, var(--ring) 20%, transparent),
+    0 12px 30px color-mix(in oklch, var(--foreground) 6%, transparent);
 }
 
 .card h4 {
@@ -97,7 +97,7 @@
 
   margin: 0 0 12px;
 
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   font-size: 1.05rem;
   font-weight: 650;
   line-height: 1.4;
@@ -110,7 +110,7 @@
 
   margin: 0;
 
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   font-size: 0.9rem;
   line-height: 1.65;
 }
@@ -124,7 +124,7 @@
 
   margin-top: auto;
 
-  color: hsl(var(--primary));
+  color: var(--primary);
   font-size: 0.85rem;
   font-weight: 600;
 
@@ -137,6 +137,88 @@
   transform: translateX(4px);
 }
 
+/* Docs layout wrapper (shared by index + individual doc pages) */
+
+.docs-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* Individual doc page (slug route) */
+
+.docs-page {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.docs-page-header {
+  margin-bottom: 32px;
+}
+
+.docs-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  margin-bottom: 20px;
+
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: color 150ms ease;
+}
+
+.docs-back-link:hover {
+  color: var(--primary);
+}
+
+.docs-page-header h1 {
+  margin: 0 0 8px;
+
+  color: var(--foreground);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.docs-page-description {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Not-found state */
+
+.container-xl {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 96px 24px;
+  text-align: center;
+}
+
+.container-xl h4 {
+  margin: 0 0 12px;
+  color: var(--foreground);
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+}
+
+.container-xl p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 /* Empty state */
 
 .docs-main > .app-grid > p {
@@ -145,11 +227,11 @@
   margin: 0;
   padding: 32px;
 
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   text-align: center;
 
-  background: hsl(var(--muted) / 0.3);
-  border: 1px dashed hsl(var(--border));
+  background: color-mix(in oklch, var(--muted) 30%, transparent);
+  border: 1px dashed var(--border);
   border-radius: 16px;
 }
 
@@ -193,6 +275,10 @@
 
   .card p {
     font-size: 0.875rem;
+  }
+
+  .docs-page {
+    padding: 32px 16px 64px;
   }
 }
 
