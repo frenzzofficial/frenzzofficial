@@ -1,0 +1,30 @@
+/* Fixed 160x600 skyscraper ads pinned to the left/right viewport gutters.
+   Stay in place while the page scrolls ("static" ads). Only shown when
+   the viewport is wide enough to fit rail + content + rail without
+   crowding the reading column. */
+
+.sidebar-adsense {
+  position: fixed;
+  top: 50%;
+  z-index: 40;
+
+  width: 160px;
+  height: 600px;
+  transform: translateY(-50%);
+
+  display: none;
+}
+
+.sidebar-adsense-left {
+  left: 24px;
+}
+
+.sidebar-adsense-right {
+  right: 24px;
+}
+
+@media (min-width: 1400px) {
+  .sidebar-adsense {
+    display: block;
+  }
+}
