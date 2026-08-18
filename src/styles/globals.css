@@ -1,34 +1,6 @@
 @import "tailwindcss";
+
+@import "./utils/base.css";
+@import "./ui/docs.css";
+
 @import "./themes/frenzz-official-theme.css";
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-}
-
-.brand-gradient-text {
-  background: linear-gradient(
-    90deg,
-    var(--primary),
-    var(--secondary),
-    var(--accent)
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.brand-gradient-bg {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
